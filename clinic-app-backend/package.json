@@ -1,0 +1,15 @@
+{
+  "name": "clinic-app-backend",
+  "version": "1.0.0",
+  "description": "This is a skill test assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "Hello"
+  },
+  "author": "naveen",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mysql": "^2.18.1"
+  }
+}
