@@ -10,12 +10,9 @@ const DB_CONFIG = {
     database: process.env.DB_NAME
 };
 
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
-});
+const SECRET_KEY = process.env.SECRET_KEY || 'fallbackSecretKey'; // Use a fallback value if the environment variable is not set
+
+const connection = mysql.createConnection(DB_CONFIG);
 
 connection.connect((err) => {
     if(err) {
@@ -25,11 +22,10 @@ connection.connect((err) => {
     console.log('Connected to the database');
 });
 
-const SECRET_KEY = process.env.SECRET_KEY || 'fallbackSecretKey'; // Use a fallback value if the environment variable is not set
-
 module.exports = {
+    DB_CONFIG,
     SECRET_KEY,
-    // Other configuration properties...
+    connection,
 };
 
 module.exports = connection;
