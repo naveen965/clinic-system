@@ -21,8 +21,6 @@ class User {
             connection.end();
         }
     }
-
-    // You may need additional methods here based on your requirements
 }
 
 module.exports = User;
