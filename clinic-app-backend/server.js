@@ -1,3 +1,25 @@
+import express from 'express';
+import mysql from 'mysql';
+import cors from 'cors';
+// import jwt from 'jsonwebtoken';
+// import bcrypt from 'bcrypt';
+// import cookieParser from 'cookie-parser'
+
+const app = express();
+app.use(express.json());
+app.use(cors());
+
+const db = mysql.createConnection({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: 'users'
+})
+
+app.listen(8081, () => {
+    console.log("Running...");
+})
+
 // const express = require('express');
 // const mysql = require('mysql');
 
@@ -24,16 +46,16 @@
 //     console.log(`Server is running on port ${port}`);
 // })
 
-const express = require('express');
-const userRoutes = require('./routes/userRoutes');
-const app = express();
+// const express = require('express');
+// const userRoutes = require('./routes/userRoutes');
+// const app = express();
 
-app.use(express.json());
+// app.use(express.json());
 
-app.use('/user', userRoutes);
+// app.use('/user', userRoutes);
 
-const PORT = process.env.PORT || 8080;
+// const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => {
-    console.log(`Server started on port ${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server started on port ${PORT}`);
+// });
