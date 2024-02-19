@@ -1,17 +1,17 @@
 import React from 'react';
-import Register from './authentication/Register';
-import Login from './authentication/Login';
 import './App.css';
-
+import Login from './authentication/Login';
+import Register from './authentication/Register';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   return (
-    <div>
-      <h2>Registration</h2>
-      <Register />
-      <h2>Login</h2>
-      <Login />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/register' element={<Register />}></Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 

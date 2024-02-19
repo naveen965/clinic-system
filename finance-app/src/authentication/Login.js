@@ -6,12 +6,12 @@ import {
   TextField,
   FormControlLabel,
   Checkbox,
-  Link,
   Grid,
   Box,
   Typography,
   Container
 } from '@mui/material';
+import { Link } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -20,7 +20,7 @@ function Copyright(props) {
     <Typography variant='body2' color='text.secondary' align='center' {...props}>
       {'Copyright © '}
       <Link color='inherit' href="https://mui.com/">
-        Your Website
+        Naveen Rajasekara
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -98,7 +98,7 @@ export default function Login() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant='body2'>
+                <Link to="/register" variant='body2'>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
