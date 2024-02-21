@@ -1,4 +1,5 @@
 import * as React from 'react';
+import PropTypes from 'prop-types';
 import { 
   Avatar, 
   Button, 
@@ -29,6 +30,11 @@ function Copyright(props) {
 }
 
 const defaultTheme = createTheme();
+
+Login.propTypes = {
+  mode: PropTypes.oneOf(['dark', 'light']).isRequired,
+  toggleColorMode: PropTypes.func.isRequired,
+};
 
 export default function Login() {
   const handleSubmit = (event) => {

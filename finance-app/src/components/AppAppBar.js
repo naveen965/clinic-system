@@ -13,6 +13,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
+import { Link } from 'react-router-dom';
 
 const logoStyle = {
     width: '70px',
@@ -139,16 +140,17 @@ function AppAppBar ({ mode, toggleColorMode }) {
                             }}
                         >
                             <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-                            <Button
-                                color="primary"
-                                variant="text"
-                                size="small"
-                                component="a"
-                                href="/material-ui/getting-started/templates/sign-in/"
-                                target="_blank"
-                            >
-                                Sign In
-                            </Button>
+                            <Link to='/login'>
+                                <Button
+                                    color="primary"
+                                    variant="text"
+                                    size="small"
+                                    component="a"
+                                    target="_blank"
+                                >
+                                    Sign In
+                                </Button>
+                            </Link>
                         </Box>
                         <Box sx={{ display: { sm: '', md: 'none' } }}>
                             <Button
@@ -194,16 +196,17 @@ function AppAppBar ({ mode, toggleColorMode }) {
                                     <MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem>
                                     <Divider />
                                     <MenuItem>
-                                        <Button
-                                            color="primary"
-                                            variant="outlined"
-                                            component="a"
-                                            href="/material-ui/getting-started/templates/sign-in/"
-                                            target="_blank"
-                                            sx={{ width: '100%' }}
-                                        >
-                                            Sign in
-                                        </Button>
+                                        <Link to='/login'>
+                                            <Button
+                                                color="primary"
+                                                variant="outlined"
+                                                component="a"
+                                                target="_blank"
+                                                sx={{ width: '100%' }}
+                                            >
+                                                Sign In
+                                            </Button>
+                                        </Link>
                                     </MenuItem>
                                 </Box>
                             </Drawer>
