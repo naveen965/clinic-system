@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
+import logo from '../images/Logo.png'
 import Box from '@mui/material/Box';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -14,7 +15,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ToggleColorMode from './ToggleColorMode';
 
 const logoStyle = {
-    width: '140px',
+    width: '70px',
     height: 'auto',
     cursor: 'pointer',
 };
@@ -72,7 +73,142 @@ function AppAppBar ({ mode, toggleColorMode }) {
                                 ? `0 0 1px rgba(85, 166, 246, 0.1), 1px 1.5px 2px -1px rgba(85, 166, 246, 0.15), 4px 4px 12px -2.5px rgba(85, 166, 246, 0.15)`
                                 : '0 0 1px rgba(2, 31, 59, 0.7), 1px 1.5px 2px -1px rgba(2, 31, 59, 0.65), 4px 4px 12px -2.5px rgba(2, 31, 59, 0.65)',
                         })}
-                    ></Toolbar>
+                    >
+                        <Box
+                            sx={{
+                                flexGrow: 1,
+                                display: 'flex',
+                                alignItems: 'center',
+                                ml: '-18px',
+                                px: 0,
+                            }}
+                        >
+                            <img 
+                                src={logo}
+                                style={logoStyle}
+                                alt="Logo of sitemark"
+                            />
+                            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+                                <MenuItem
+                                    onClick={() => scrollToSection('features')}
+                                    sx={{ py: '6px', px: '12px' }}
+                                >
+                                    <Typography variant='body2' color='text.primary'>
+                                        Features
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={() => scrollToSection('testimonials')}
+                                    sx={{ py: '6px', px: '12px' }}
+                                >
+                                    <Typography variant='body2' color='text.primary'>
+                                        Testimonials
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={() => scrollToSection('highlights')}
+                                    sx={{ py: '6px', px: '12px' }}
+                                >
+                                    <Typography variant="body2" color="text.primary">
+                                        Highlights
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={() => scrollToSection('pricing')}
+                                    sx={{ py: '6px', px: '12px' }}
+                                >
+                                    <Typography variant="body2" color="text.primary">
+                                        Pricing
+                                    </Typography>
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={() => scrollToSection('faq')}
+                                    sx={{ py: '6px', px: '12px' }}
+                                >
+                                    <Typography variant="body2" color="text.primary">
+                                        FAQ
+                                    </Typography>
+                                </MenuItem>
+                            </Box>
+                        </Box>
+                        <Box
+                            sx={{
+                                display: { xs: 'none', md: 'flex' },
+                                gap: 0.5,
+                                alignItems: 'center',
+                            }}
+                        >
+                            <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+                            <Button
+                                color="primary"
+                                variant="text"
+                                size="small"
+                                component="a"
+                                href="/material-ui/getting-started/templates/sign-in/"
+                                target="_blank"
+                            >
+                                Sign In
+                            </Button>
+                        </Box>
+                        <Box sx={{ display: { sm: '', md: 'none' } }}>
+                            <Button
+                                variant="text"
+                                color="primary"
+                                aria-label="menu"
+                                onClick={toggleDrawer(true)}
+                                sx={{ minWidth: '30px', p: '4px' }}
+                            >
+                                <MenuIcon/>
+                            </Button>
+                            <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
+                                <Box
+                                    sx={{
+                                        minWidth: '60dvw',
+                                        p: 2,
+                                        backgroundColor: 'background.paper',
+                                        flexGrow: 1,
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'end',
+                                        flexGrow: 1,
+                                        }}
+                                    >
+                                        <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
+                                    </Box>
+                                    <MenuItem onClick={() => scrollToSection('features')}>
+                                        Features
+                                    </MenuItem>
+                                    <MenuItem onClick={() => scrollToSection('testimonials')}>
+                                        Testimonials
+                                    </MenuItem>
+                                    <MenuItem onClick={() => scrollToSection('highlights')}>
+                                        Highlights
+                                    </MenuItem>
+                                    <MenuItem onClick={() => scrollToSection('pricing')}>
+                                        Pricing
+                                    </MenuItem>
+                                    <MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem>
+                                    <Divider />
+                                    <MenuItem>
+                                        <Button
+                                            color="primary"
+                                            variant="outlined"
+                                            component="a"
+                                            href="/material-ui/getting-started/templates/sign-in/"
+                                            target="_blank"
+                                            sx={{ width: '100%' }}
+                                        >
+                                            Sign in
+                                        </Button>
+                                    </MenuItem>
+                                </Box>
+                            </Drawer>
+                        </Box>
+                    </Toolbar>
                 </Container>
             </AppBar>
         </div>

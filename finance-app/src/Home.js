@@ -9,6 +9,15 @@ import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import AppAppBar from './components/AppAppBar';
+import Hero from './components/Hero';
+// import LogoCollection from './components/LogoCollection';
+import Features from './components/Features';
+import Testimonials from './components/Testimonials';
+// import Highlights from './components/Highlights';
+// import Pricing from './components/Pricing';
+// import FAQ from './components/FAQ';
+// import Footer from './components/Footer';
+import getLPTheme from './getLPTheme';
 
 const defaultTheme = createTheme({});
 
@@ -50,10 +59,17 @@ function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }) {
   );
 }
 
+ToggleCustomTheme.propTypes = {
+  showCustomTheme: PropTypes.shape({
+    valueOf: PropTypes.func.isRequired,
+  }).isRequired,
+  toggleCustomTheme: PropTypes.func.isRequired,
+};
+
 export default function Home() {
   const [mode, setMode] = React.useState('dark');
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
-  //const LPtheme = createTheme(getLPtheme(mode));
+  const LPtheme = createTheme(getLPTheme(mode));
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
@@ -64,10 +80,25 @@ export default function Home() {
   };
 
   return (
-    <ThemeProvider theme={showCustomTheme ? defaultTheme : "hello"}>
+    <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
       <CssBaseline/>
       <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
-      <Box sx={{ bgcolor: 'background.default' }}></Box>
+      <Hero/>
+      {/* 
+      <Box sx={{ bgcolor: 'background.default' }}>
+        <LogoCollection/>
+        <Features/>
+        <Divider/>
+        <Testimonials/>
+        <Divider/>
+        <Highlights />
+        <Divider />
+        <Pricing />
+        <Divider />
+        <FAQ />
+        <Divider />
+        <Footer />
+      </Box> */}
       <ToggleCustomTheme
         showCustomTheme={showCustomTheme}
         toggleCustomTheme={toggleCustomTheme}
