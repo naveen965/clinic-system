@@ -87,7 +87,7 @@ function AppAppBar ({ mode, toggleColorMode }) {
                             <img 
                                 src={logo}
                                 style={logoStyle}
-                                alt="Logo of sitemark"
+                                alt="Logo of LMS"
                             />
                             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                                 <MenuItem

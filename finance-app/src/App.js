@@ -4,7 +4,7 @@ import Login from './authentication/Login';
 import Register from './authentication/Register';
 import Home from './Home';
 // import Dashboard from './Dashboard';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
 //   <Route

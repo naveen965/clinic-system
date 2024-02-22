@@ -1,5 +1,5 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
+import React, {useState} from 'react';
+// import PropTypes from 'prop-types';
 import { 
   Avatar, 
   Button, 
@@ -15,6 +15,7 @@ import {
 import { Link } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Validation from '../validation/LoginValidation';
 
 function Copyright(props) {
   return (
@@ -31,12 +32,20 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-Login.propTypes = {
-  mode: PropTypes.oneOf(['dark', 'light']).isRequired,
-  toggleColorMode: PropTypes.func.isRequired,
-};
-
 export default function Login() {
+  const [values, setValues] = useState({
+    email: '',
+    password: ''
+  })
+
+  const [errors, setErrors] = useState({
+
+  })
+
+  const handleInput = (event) => {
+    setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -44,6 +53,7 @@ export default function Login() {
       email: data.get('email'),
       password: data.get('password'),
     });
+    setErrors(Validation(values));
   };
 
   return (
@@ -74,7 +84,10 @@ export default function Login() {
               name='email'
               autoComplete='email'
               autoFocus
+              onChange={handleInput}
+              error={errors.email}
             />
+            {errors.email && <span style={{ color: 'red' }}> {errors.email} </span>}
             <TextField
               margin='normal'
               required
@@ -84,11 +97,23 @@ export default function Login() {
               name='password'
               type='password'
               autoComplete='current-password'
+              onChange={handleInput}
+              error={errors.password}
             />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary'/>}
-              label="Remember me"
-            />
+            <Grid container>
+              <Grid item xs>
+                {errors.email && <span style={{ color: 'red' }}> {errors.email} </span>}
+              </Grid>
+            </Grid>
+            <Grid container>
+              <Grid item xs>
+                <FormControlLabel
+                  control={<Checkbox value='remember' color='primary'/>}
+                  label="Remember me"
+                />
+              </Grid>
+            </Grid>
+
             <Button
               type='submit'
               fullWidth
