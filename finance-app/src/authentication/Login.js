@@ -15,7 +15,9 @@ import {
 import { Link } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Validation from '../validation/LoginValidation';import getLPTheme from './getLPTheme';
+import Validation from '../validation/LoginValidation';
+import getLPTheme from '../getLPTheme';
+import AppAppBar from '../components/AppAppBar';
 
 function Copyright(props) {
   return (
@@ -56,11 +58,17 @@ export default function Login() {
     setErrors(Validation(values));
   }
 
+  const [mode, setMode] = React.useState('dark');
   const [showCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
 
+  const toggleColorMode = () => {
+    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   return (
     <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
+      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
       <Container component="main" maxWidth="xs">
         <CssBaseline/>
         <Box
