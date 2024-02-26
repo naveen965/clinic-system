@@ -15,7 +15,7 @@ import {
 import { Link } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Validation from '../validation/LoginValidation';
+import Validation from '../validation/LoginValidation';import getLPTheme from './getLPTheme';
 
 function Copyright(props) {
   return (
@@ -54,10 +54,13 @@ export default function Login() {
       password: data.get('password'),
     });
     setErrors(Validation(values));
-  };
+  }
+
+  const [showCustomTheme] = React.useState(true);
+  const LPtheme = createTheme(getLPTheme(mode));
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline/>
         <Box
