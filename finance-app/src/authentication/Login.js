@@ -12,12 +12,11 @@ import {
   Typography,
   Container
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Validation from '../validation/LoginValidation';
-import getLPTheme from '../getLPTheme';
-import AppAppBar from '../components/AppAppBar';
+
 
 function Copyright(props) {
   return (
@@ -35,6 +34,11 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Login() {
+  
+  const location = useLocation();
+  const themeMode = location?.state?.themeMode;
+  console.log("AAAAAAA", themeMode);
+
   const [values, setValues] = useState({
     email: '',
     password: ''
@@ -58,17 +62,8 @@ export default function Login() {
     setErrors(Validation(values));
   }
 
-  const [mode, setMode] = React.useState('dark');
-  const [showCustomTheme] = React.useState(true);
-  const LPtheme = createTheme(getLPTheme(mode));
-
-  const toggleColorMode = () => {
-    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
-
   return (
-    <ThemeProvider theme={showCustomTheme ? LPtheme : defaultTheme}>
-      <AppAppBar mode={mode} toggleColorMode={toggleColorMode} />
+    <ThemeProvider theme={themeMode || defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline/>
         <Box

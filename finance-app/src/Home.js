@@ -72,6 +72,7 @@ export default function Home() {
 
   const toggleColorMode = () => {
     setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    console.log("setffffffffffff ", mode);
   };
 
   // const toggleCustomTheme = () => {
