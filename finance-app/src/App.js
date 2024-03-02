@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Login from './authentication/Login';
 import Register from './authentication/Register';
+import ForgotPassword from './authentication/ForgotPassword';
 import Home from './Home';
 // import Dashboard from './Dashboard';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -40,6 +41,7 @@ const App = () => {
       <Routes>
         <Route exact path='/login' element={<Login />}></Route>
         <Route exact path='/register' element={<Register />}></Route>
+        <Route exact path='/forgot-password' element={<ForgotPassword />}></Route>
         <Route path='/' element={<Home/>}></Route>
       </Routes>
     </Router>

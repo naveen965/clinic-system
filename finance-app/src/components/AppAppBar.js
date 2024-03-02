@@ -196,7 +196,7 @@ function AppAppBar ({ mode, toggleColorMode }) {
                                     <MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem>
                                     <Divider />
                                     <MenuItem>
-                                        <Link to={{ pathname: '/login', state: { themeMode: mode }}}>   
+                                        <Link to={{ pathname: '/login', state: { themeMode: mode } }}>   
                                             <Button
                                                 color="primary"
                                                 variant="outlined"

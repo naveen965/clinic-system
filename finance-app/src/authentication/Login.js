@@ -37,6 +37,7 @@ export default function Login() {
   
   const location = useLocation();
   const themeMode = location?.state?.themeMode;
+  // const themeMode = useParams();
   console.log("AAAAAAA", themeMode);
 
   const [values, setValues] = useState({
@@ -63,7 +64,7 @@ export default function Login() {
   }
 
   return (
-    <ThemeProvider theme={themeMode || defaultTheme}>
+    <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline/>
         <Box
@@ -130,7 +131,7 @@ export default function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant='body2'>
+                <Link to="/forgot-password" variant='body2'>
                   Forgot password?
                 </Link>
               </Grid>
