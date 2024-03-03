@@ -140,7 +140,10 @@ function AppAppBar ({ mode, toggleColorMode }) {
                             }}
                         >
                             <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-                            <Link to={{ pathname: '/login', state: { themeMode: mode } }}>
+                            <Link 
+                                to='/login'
+                                state= {{themeMode: mode}} 
+                            >
                                 <Button
                                     color="primary"
                                     variant="text"
@@ -196,7 +199,10 @@ function AppAppBar ({ mode, toggleColorMode }) {
                                     <MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem>
                                     <Divider />
                                     <MenuItem>
-                                        <Link to={{ pathname: '/login', state: { themeMode: mode } }}>   
+                                        <Link 
+                                            to='/login'
+                                            state= {{themeMode: mode}} 
+                                        >  
                                             <Button
                                                 color="primary"
                                                 variant="outlined"

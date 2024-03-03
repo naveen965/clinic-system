@@ -16,7 +16,7 @@ import { Link, useLocation } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Validation from '../validation/LoginValidation';
-
+import getLPTheme from '../getLPTheme';
 
 function Copyright(props) {
   return (
@@ -38,7 +38,8 @@ export default function Login() {
   const location = useLocation();
   const themeMode = location?.state?.themeMode;
   // const themeMode = useParams();
-  console.log("AAAAAAA", themeMode);
+  // console.log("AAAAAAA", themeMode);
+  const LPtheme = createTheme(getLPTheme(themeMode));
 
   const [values, setValues] = useState({
     email: '',
@@ -64,7 +65,7 @@ export default function Login() {
   }
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={LPtheme != null ? LPtheme : defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline/>
         <Box
