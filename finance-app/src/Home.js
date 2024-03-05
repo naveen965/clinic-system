@@ -65,15 +65,15 @@ const defaultTheme = createTheme({});
 //   toggleCustomTheme: PropTypes.func.isRequired,
 // };
 
-export default function Home() {
-  const [mode, setMode] = React.useState('dark');
+export default function Home({mode, toggleColorMode}) {
+  // const [mode, setMode] = React.useState('dark');
   const [showCustomTheme] = React.useState(true);
   const LPtheme = createTheme(getLPTheme(mode));
 
-  const toggleColorMode = () => {
-    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
-    console.log("setffffffffffff ", mode);
-  };
+  // const toggleColorMode = () => {
+  //   setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  //   console.log("setffffffffffff ", mode);
+  // };
 
   // const toggleCustomTheme = () => {
   //   setShowCustomTheme((prev) => !prev);

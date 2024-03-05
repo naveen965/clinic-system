@@ -35,14 +35,20 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 const App = () => {
   //const isAuthenticated = false;
+  const [mode, setMode] = React.useState('dark');
+
+  const toggleColorMode = () => {
+    setMode((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    console.log("setffffffffffff ", mode);
+  };
 
   return (
     <Router>
       <Routes>
-        <Route exact path='/login' element={<Login />}></Route>
+        <Route exact path='/login' element={<Login mode={mode}/>}></Route>
         <Route exact path='/register' element={<Register />}></Route>
         <Route exact path='/forgot-password' element={<ForgotPassword />}></Route>
-        <Route path='/' element={<Home/>}></Route>
+        <Route path='/' element={<Home mode={mode} toggleColorMode={toggleColorMode}/>}></Route>
       </Routes>
     </Router>
   );

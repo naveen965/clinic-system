@@ -33,12 +33,12 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function Login() {
+export default function Login({mode}) {
   
   const location = useLocation();
   const themeMode = location?.state?.themeMode;
-  // const themeMode = useParams();
-  // console.log("AAAAAAA", themeMode);
+  const mod = mode;
+  console.log("AAAAAAA", mod);
   const LPtheme = createTheme(getLPTheme(themeMode));
 
   const [values, setValues] = useState({
@@ -132,12 +132,20 @@ export default function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link to="/forgot-password" variant='body2'>
+                <Link
+                  to="/forgot-password"
+                  state= {{themeMode: mode}}
+                  variant='body2'
+                >
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link to="/register" variant='body2'>
+                <Link 
+                  to="/register"
+                  state= {{themeMode: mode}} 
+                  variant='body2'
+                  >
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

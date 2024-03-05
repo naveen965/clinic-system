@@ -11,7 +11,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import getLPTheme from '../getLPTheme';
 
 function Copyright(props) {
   return (
@@ -29,6 +30,10 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
+  const location = useLocation();
+  const themeMode = location?.state?.themeMode;
+  const LPtheme = createTheme(getLPTheme(themeMode));
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -39,7 +44,7 @@ export default function SignUp() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={LPtheme != null ? LPtheme : defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
