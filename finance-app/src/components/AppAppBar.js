@@ -21,7 +21,7 @@ const logoStyle = {
     cursor: 'pointer',
 };
 
-function AppAppBar ({ mode, toggleColorMode }) {
+function AppAppBar ({ mode, toggleColorMode, isAuthenticated }) {
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen) => () => {
@@ -140,20 +140,32 @@ function AppAppBar ({ mode, toggleColorMode }) {
                             }}
                         >
                             <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-                            <Link 
-                                to='/login'
-                                state= {{themeMode: mode}} 
-                            >
-                                <Button
-                                    color="primary"
-                                    variant="text"
-                                    size="small"
-                                    component="a"
-                                    target="_blank"
+                            {/* {isAuthenticated ? (
+                                <Link 
+                                    to='/profile'
+                                    state= {{themeMode: mode}} 
                                 >
-                                    Sign In
-                                </Button>
-                            </Link>
+                                    <Button color="primary" variant="text" size="small">
+                                    Profile
+                                    </Button>
+                                </Link>
+                            ) : ( */}
+                                <Link 
+                                    to='/login'
+                                    state= {{themeMode: mode}} 
+                                >
+                                    <Button
+                                        color="primary"
+                                        variant="text"
+                                        size="small"
+                                        component="a"
+                                        target="_blank"
+                                    >
+                                        Sign In
+                                    </Button>
+                                </Link>
+                            {/* )} */}
+                            
                         </Box>
                         <Box sx={{ display: { sm: '', md: 'none' } }}>
                             <Button
@@ -227,6 +239,7 @@ function AppAppBar ({ mode, toggleColorMode }) {
 AppAppBar.propTypes = {
     mode: PropTypes.oneOf(['dark', 'light']).isRequired,
     toggleColorMode: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
 };
 
 export default AppAppBar;

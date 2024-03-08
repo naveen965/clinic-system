@@ -46,7 +46,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route exact path='/login' element={<Login mode={mode}/>}></Route>
-        <Route exact path='/register' element={<Register />}></Route>
+        <Route exact path='/register' element={<Register mode={mode}/>}></Route>
         <Route exact path='/forgot-password' element={<ForgotPassword />}></Route>
         <Route path='/' element={<Home mode={mode} toggleColorMode={toggleColorMode}/>}></Route>
       </Routes>

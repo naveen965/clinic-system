@@ -13,7 +13,40 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: 'users'
+    database: 'finance'
+})
+
+app.post('/signup', (req, res) => {
+    const sql = "INSERT INTO users (`firstname`, `lastname`, `email`, `password`) VALUES (?)"
+    const values = [
+        req.body.firstname,
+        req.body.lastname,
+        req.body.email,
+        req.body.password
+    ]
+    db.query(sql, [values], (err, data) => {
+        if(err) {
+            return res.json("Error");
+        }
+
+        return res.json(data);
+    })
+})
+
+app.post('/login', (req, res) => {
+    const sql = "SELECT * FROM users WHERE `email` = ? AND `password` = ?"
+    db.query(sql, [req.body.email, req.body.password], (err, data) => {
+        if(err) {
+            return res.json("Error");
+        }
+        
+        if(data.length > 0){
+            return res.json("Success");
+        }
+        else{
+            return res.json("Fail");
+        }
+    })
 })
 
 app.listen(8081, () => {

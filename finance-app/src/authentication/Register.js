@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,8 +11,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import getLPTheme from '../getLPTheme';
+import Validation from '../validation/RegisterValidation';
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -29,19 +31,41 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function SignUp() {
+export default function SignUp({mode}) {
+  const navigation = useNavigate();
   const location = useLocation();
   const themeMode = location?.state?.themeMode;
   const LPtheme = createTheme(getLPTheme(themeMode));
 
+  const [values, setValues] = useState({
+    firstname: '',
+    lastname: '',
+    email: '',
+    password: ''
+  })
+
+  const [errors, setErrors] = useState({})
+
+  const handleInput = (event) => {
+    setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
+  }
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+    //const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
+    if (errors.firstname === "" && errors.lastname === "" && errors.email === "" && errors.password === ""){
+      axios.post('http://localhost:8081/signup', values)
+      .then(
+        navigation('/')
+      )
+      .catch(err => console.log(err));
+    }
+    setErrors(Validation(values));
+  }
 
   return (
     <ThemeProvider theme={LPtheme != null ? LPtheme : defaultTheme}>
@@ -63,26 +87,32 @@ export default function SignUp() {
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="firstname"
                   required
                   fullWidth
                   id="firstName"
                   label="First Name"
                   autoFocus
+                  onChange={handleInput}
+                  error={errors.firstname}
                 />
+                {errors.firstname && <span style={{ color: 'red' }}> {errors.firstname} </span>}
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
                   id="lastName"
                   label="Last Name"
-                  name="lastName"
+                  name="lastname"
                   autoComplete="family-name"
+                  onChange={handleInput}
+                  error={errors.lastname}
                 />
+                {errors.lastname && <span style={{ color: 'red' }}> {errors.lastname} </span>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -92,7 +122,10 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  onChange={handleInput}
+                  error={errors.email}
                 />
+                {errors.email && <span style={{ color: 'red' }}> {errors.email} </span>}
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -103,7 +136,10 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  onChange={handleInput}
+                  error={errors.password}
                 />
+                {errors.password && <span style={{ color: 'red' }}> {errors.password} </span>}
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
@@ -122,7 +158,11 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link to="/login" variant="body2">
+                <Link
+                  to="/login"
+                  state= {{themeMode: mode}} 
+                  variant='body2'
+                >
                   Already have an account? Sign in
                 </Link>
               </Grid>

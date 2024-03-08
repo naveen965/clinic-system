@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "Hello"
+    "test": "Hello",
+    "start": "nodemon server.js"
   },
   "author": "naveen",
   "license": "ISC",

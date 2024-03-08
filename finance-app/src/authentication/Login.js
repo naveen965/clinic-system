@@ -12,11 +12,12 @@ import {
   Typography,
   Container
 } from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Validation from '../validation/LoginValidation';
 import getLPTheme from '../getLPTheme';
+import axios from 'axios';
 
 function Copyright(props) {
   return (
@@ -34,21 +35,18 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function Login({mode}) {
-  
+  const navigation = useNavigate();
   const location = useLocation();
   const themeMode = location?.state?.themeMode;
-  const mod = mode;
-  console.log("AAAAAAA", mod);
   const LPtheme = createTheme(getLPTheme(themeMode));
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const [values, setValues] = useState({
     email: '',
     password: ''
   })
 
-  const [errors, setErrors] = useState({
-
-  })
+  const [errors, setErrors] = useState({})
 
   const handleInput = (event) => {
     setValues(prev => ({...prev, [event.target.name]: [event.target.value]}))
@@ -56,11 +54,24 @@ export default function Login({mode}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    //const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
+    if (errors.email === "" && errors.password === ""){
+      axios.post('http://localhost:8081/login', values)
+      .then(res => {
+        if(res.data === "Success"){
+          navigation('/');
+          //isAuthenticated = setIsAuthenticated(true);
+        }
+        else{
+          alert("No record existed");
+        }
+      })
+      .catch(err => console.log(err));
+    }
     setErrors(Validation(values));
   }
 
@@ -110,7 +121,7 @@ export default function Login({mode}) {
             />
             <Grid container>
               <Grid item xs>
-                {errors.email && <span style={{ color: 'red' }}> {errors.email} </span>}
+                {errors.password && <span style={{ color: 'red' }}> {errors.password} </span>}
               </Grid>
             </Grid>
             <Grid container>
